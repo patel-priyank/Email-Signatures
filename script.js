@@ -1,22 +1,23 @@
 const text = document.querySelector('.text');
-const name = document.querySelector('.name');
-const editName = document.querySelector('.edit-name');
+const copy = document.querySelector('.copy');
+const copyText = document.querySelector('.copy-text');
 
-editName.addEventListener('click', () => {
-  let newName = prompt('Enter new name', name.innerHTML);
-  if (newName === '') {
-    newName = 'Elon Musk';
-  }
-  name.innerHTML = newName;
-  localStorage.setItem('name', newName);
+copy.addEventListener('click', () => {
+  copyText.value = text.innerHTML;
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+
+  copy.innerHTML = '[copied]';
+  copy.classList.add('no-click');
+
+  setTimeout(() => {
+    copyText.value = '';
+
+    copy.innerHTML = '[copy]';
+    copy.classList.remove('no-click');
+  }, 1000);
 });
-
-(async () => {
-  let setName = localStorage.getItem('name');
-  if (setName) {
-    name.innerHTML = setName;
-  }
-})();
 
 (async () => {
   const signature = await (await fetch('./signatures.txt')).text();

@@ -17,8 +17,7 @@ body {
   margin: 0 auto;
 }
 
-.text,
-.name {
+.text {
   font-size: 2.5rem;
   margin-top: 2rem;
 }
@@ -31,4 +30,12 @@ body {
   color: var(--secondary);
   text-decoration: none;
   cursor: pointer;
+}
+
+.no-click {
+  pointer-events: none;
+}
+
+.d-none {
+  display: none;
 }
