@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime');
+@import url('https://fonts.googleapis.com/css2?family=Lato');
 
 :root {
   --primary: hsl(0, 0%, 0%);
@@ -7,7 +7,7 @@
 }
 
 body {
-  font-family: 'Courier Prime', monospace;
+  font-family: 'Lato', sans-serif;
   background-color: var(--background);
   color: var(--primary);
 }
