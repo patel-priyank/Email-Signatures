@@ -6,12 +6,6 @@
   --background: hsl(0, 0%, 100%);
 }
 
-[data-theme='dark'] {
-  --primary: hsl(0, 0%, 100%);
-  --secondary: hsl(0, 0%, 25%);
-  --background: hsl(0, 0%, 0%);
-}
-
 body {
   font-family: 'Courier Prime', monospace;
   background-color: var(--background);
