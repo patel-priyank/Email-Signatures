@@ -21,11 +21,11 @@ copy.addEventListener('click', () => {
 
 (async () => {
   const signature = await (await fetch('./signatures.txt')).text();
-  const signatures = signature.split('\n');
+  const signatures = signature.split('\n').map((signature) => signature.replace('\r', ''));
   let index = 0;
   while (true) {
     index = Math.floor(Math.random() * signatures.length);
-    if (index != localStorage.getItem('index')) break;
+    if (index != localStorage.getItem('index') && signatures[index] !== '') break;
   }
   localStorage.setItem('index', index);
   text.innerHTML = signatures[index];
