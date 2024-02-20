@@ -8,25 +8,30 @@ copy.addEventListener('click', () => {
   copyText.setSelectionRange(0, 99999);
   navigator.clipboard.writeText(copyText.value);
 
-  copy.innerHTML = '[copied]';
+  const copyIcon = '<i class="bi bi-clipboard"></i>';
+  const copyIconCheck = '<i class="bi bi-clipboard-check"></i>';
+
+  copy.innerHTML = `${copyIconCheck} copied`;
   copy.classList.add('no-click');
 
   setTimeout(() => {
     copyText.value = '';
 
-    copy.innerHTML = '[copy]';
+    copy.innerHTML = `${copyIcon} copy`;
     copy.classList.remove('no-click');
   }, 1000);
 });
 
 (async () => {
-  const signature = await (await fetch('./signatures.txt')).text();
-  const signatures = signature.split('\n').map((signature) => signature.replace('\r', ''));
+  const signatures = await (await fetch('./signatures.txt')).text();
+  const signatureArr = signatures.split('\n').map((signature) => signature.replace('\r', ''));
   let index = 0;
+
   while (true) {
-    index = Math.floor(Math.random() * signatures.length);
-    if (index != localStorage.getItem('index') && signatures[index] !== '') break;
+    index = Math.floor(Math.random() * signatureArr.length);
+    if (index != localStorage.getItem('index') && signatureArr[index] !== '') break;
   }
+
   localStorage.setItem('index', index);
-  text.innerHTML = signatures[index];
+  text.innerHTML = signatureArr[index];
 })();
