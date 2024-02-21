@@ -1,6 +1,9 @@
 const text = document.querySelector('.text');
+const regenerate = document.querySelector('.regenerate');
 const copy = document.querySelector('.copy');
 const copyText = document.querySelector('.copy-text');
+
+regenerate.addEventListener('click', () => (location = location));
 
 copy.addEventListener('click', () => {
   copyText.value = text.innerHTML;
