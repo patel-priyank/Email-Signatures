@@ -32,9 +32,9 @@ copy.addEventListener('click', () => {
 
   while (true) {
     index = Math.floor(Math.random() * signatureArr.length);
-    if (index != localStorage.getItem('index') && signatureArr[index] !== '') break;
+    if (index != localStorage.getItem('email-index') && signatureArr[index] !== '') break;
   }
 
-  localStorage.setItem('index', index);
+  localStorage.setItem('email-index', index);
   text.innerHTML = signatureArr[index];
 })();
