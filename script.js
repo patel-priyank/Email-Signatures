@@ -28,6 +28,8 @@ const storage = {
   }
 };
 
+const haptic = pattern => navigator.vibrate?.(pattern);
+
 const fade = (el, i) => {
   el.classList.remove('fade');
   void el.offsetWidth; // restart animation
@@ -166,6 +168,7 @@ copy.addEventListener('click', async () => {
   if (!text) return;
 
   await navigator.clipboard.writeText(text);
+  haptic([10, 60, 10]);
 
   const icon = copy.querySelector('i');
   const label = copy.querySelector('.label');
@@ -181,9 +184,17 @@ copy.addEventListener('click', async () => {
   }, 1200);
 });
 
-regenerate.addEventListener('click', render);
+regenerate.addEventListener('click', () => {
+  haptic(10);
+  render();
+});
+
+document.querySelector('.source').addEventListener('click', () => haptic(10));
 
 window.addEventListener('resize', () => signatures.length && fit());
+
+// iOS Safari only applies :active when a touch listener exists
+document.addEventListener('touchstart', () => {}, { passive: true });
 
 document.addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
