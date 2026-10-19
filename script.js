@@ -3,7 +3,9 @@ const signature = document.querySelector('.signature');
 const nameEl = document.querySelector('.name');
 const copy = document.querySelector('.copy');
 const regenerate = document.querySelector('.new');
-const keys = document.querySelectorAll('.key');
+const about = document.querySelector('.about');
+const aboutToggle = document.querySelector('.about-toggle');
+const keys = document.querySelectorAll('[data-shortcut]');
 
 const DEFAULT_NAME = 'Your Name';
 const INDEX_KEY = 'email-index';
@@ -189,7 +191,28 @@ regenerate.addEventListener('click', () => {
   render();
 });
 
-document.querySelector('.source').addEventListener('click', () => haptic(10));
+document.querySelector('.about-source').addEventListener('click', () => haptic(10));
+
+const setAbout = open => {
+  const card = about.parentElement.getBoundingClientRect();
+  const btn = aboutToggle.getBoundingClientRect();
+  about.style.setProperty(
+    '--origin',
+    `${btn.left + btn.width / 2 - card.left}px ${btn.top + btn.height / 2 - card.top}px`
+  );
+
+  about.classList.toggle('open', open);
+  about.inert = !open;
+  nameEl.inert = open; // keep the covered name out of the tab order
+  aboutToggle.setAttribute('aria-expanded', open);
+  aboutToggle.setAttribute('aria-label', open ? 'Close about (A)' : 'About (A)');
+  aboutToggle.title = aboutToggle.getAttribute('aria-label');
+};
+
+aboutToggle.addEventListener('click', () => {
+  haptic(10);
+  setAbout(!about.classList.contains('open'));
+});
 
 window.addEventListener('resize', () => signatures.length && fit());
 
@@ -199,6 +222,11 @@ document.addEventListener('touchstart', () => {}, { passive: true });
 document.addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey || e.repeat) return;
   if (document.activeElement === nameEl) return;
+
+  if (e.key === 'Escape' && about.classList.contains('open')) {
+    setAbout(false);
+    return;
+  }
 
   const key = [...keys].find(k => k.dataset.shortcut === e.key.toLowerCase());
   if (!key) return;

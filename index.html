@@ -10,12 +10,52 @@
 
   <body>
     <main class="container loading">
-      <h1 class="title">Email Sign Generator</h1>
+      <h1 class="title">
+        Email Sign Generator
+        <button
+          class="about-toggle"
+          data-shortcut="a"
+          aria-expanded="false"
+          aria-controls="about"
+          aria-label="About (A)"
+          title="About (A)"
+        >
+          <i class="ph ph-info"></i>
+          <i class="ph ph-x"></i>
+        </button>
+      </h1>
 
       <article class="email" aria-live="polite">
         <div class="body" aria-hidden="true"></div>
         <p class="signature"></p>
         <p class="name" contenteditable="plaintext-only" spellcheck="false" title="Click to edit your name"></p>
+
+        <section class="about" id="about" aria-labelledby="about-title" inert>
+          <h2 class="about-title" id="about-title">About</h2>
+          <p>
+            "Best regards" has never once been the best. This picks a random sign-off for your next email, somewhere
+            between casually cool and completely unhinged.
+          </p>
+          <p>Click your name to change it. Press <kbd>C</kbd> to copy, <kbd>N</kbd> for another.</p>
+          <p>
+            Got a better one?
+            <a href="https://github.com/patel-priyank/Email-Signatures#add-your-own" target="_blank" rel="noopener"
+              >Add yours</a
+            >
+            to the list.
+          </p>
+
+          <a
+            class="about-source"
+            href="https://github.com/patel-priyank/Email-Signatures"
+            target="_blank"
+            rel="noopener"
+          >
+            <i class="ph ph-github-logo"></i>
+            <span>View source on GitHub</span>
+            <i class="ph ph-arrow-up-right"></i>
+          </a>
+        </section>
       </article>
 
       <nav class="keys">
@@ -34,21 +74,6 @@
           </span>
           <span class="label">new</span>
         </button>
-
-        <a
-          class="key source"
-          data-shortcut="s"
-          href="https://github.com/patel-priyank/Email-Signatures"
-          target="_blank"
-          rel="noopener"
-          aria-label="Source code (S)"
-        >
-          <span class="top">
-            <i class="ph ph-code"></i>
-            <kbd>S</kbd>
-          </span>
-          <span class="label">source</span>
-        </a>
       </nav>
     </main>
 
