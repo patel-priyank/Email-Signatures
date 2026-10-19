@@ -166,6 +166,7 @@ nameEl.addEventListener('focus', () => {
 nameEl.addEventListener('blur', () => setName(nameEl.textContent));
 
 copy.addEventListener('click', async () => {
+  closeAbout();
   const text = signature.textContent.replace(/,$/, '');
   if (!text) return;
 
@@ -187,6 +188,7 @@ copy.addEventListener('click', async () => {
 });
 
 regenerate.addEventListener('click', () => {
+  closeAbout();
   haptic(10);
   render();
 });
@@ -208,6 +210,8 @@ const setAbout = open => {
   aboutToggle.setAttribute('aria-label', open ? 'Close about (A)' : 'About (A)');
   aboutToggle.title = aboutToggle.getAttribute('aria-label');
 };
+
+const closeAbout = () => about.classList.contains('open') && setAbout(false);
 
 aboutToggle.addEventListener('click', () => {
   haptic(10);
